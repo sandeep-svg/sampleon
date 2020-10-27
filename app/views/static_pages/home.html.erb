@@ -1,0 +1,36 @@
+<% if flash[:note1] %>
+    <div ><%= flash[:note1] %> at <%= Time.now %></div>
+<% end %>
+<% if logged_in? %>
+<% if @micropost.errors.any?%>
+     <ul> <%@micropost.errors.full_messages.each do |msg|%>
+      <li><%=msg%></li>
+      <%end%></ul>
+<%end%>
+<% if flash[:success] %>
+    <div ><%= flash[:success] %> successfully at <%= Time.now %></div>
+<% end %>
+  <div class="row">
+    <aside class="col-md-4">
+      <section class="user_info">
+<h3>Hello , <%= current_user.name %></h3>
+<span><%= link_to "view my profile", current_user %></span>
+<span><%= pluralize(current_user.microposts.count, "micropost") %></span>
+      </section>
+      
+       <%= form_for (@micropost) do |f| %>
+ 
+    <%= f.text_area :content, placeholder: "write something..." %><br/>
+  
+        <%= f.submit "Post", class: "btn btn-primary" %>
+<% end %>
+    </aside>
+  </div>
+<% else %>
+<body><div  class='home'>
+<h1>Welcome !! </h1><br/>
+<p><a  class='btn btn-outline-primary' href='http://localhost:3000/signup'> <em>Sign Up now!</em> </a></p><br/>
+<p><a  class='btn btn-outline-success' href='http://localhost:3000/login'> <em>login</em> </a></p>
+</div>
+</body>
+<% end %>

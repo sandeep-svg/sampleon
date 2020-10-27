@@ -1,0 +1,32 @@
+<% if flash[:note2] %>
+    <div class='notice'><%= flash[:note2] %> at <%= Time.now %></div>
+<% end %>
+
+  <div class="container">
+     <p><%= link_to "Home", root_path %></p>
+        <p><%= link_to "Help", '#' %></p>
+        <% if logged_in? %>
+          <p><%= link_to "edit profile", edit_user_path(current_user) %></p>
+              <p>
+                <%=image_tag("user.png",alt:"User")%>
+                <h5>Name   :   <%=@user.name%></h5>
+                <h5>Email   :  <%=@user.email%></h5>
+                <%= link_to "Log out", logout_path, method: "delete" %>
+              </p>
+        <% else %>
+        <h5>please login to continue.</h5>
+          <p><%= link_to "Log in", login_path %></p>
+        <% end %>
+     </div>
+<div class="col-md-8">
+    <% if @user.microposts.any? %>
+      <h3>Microposts (<%= @user.microposts.count %>)</h3>
+      <ol class="microposts">
+        <%= @user.microposts %>
+      </ol>
+    <% end %>
+  </div>
+
+
+
+

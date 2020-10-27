@@ -1,0 +1,9 @@
+<div class='users'>
+
+<% @user.each do |u| %>
+<%=image_tag("user.png")%>
+<p>Name:<%=u.name%></p>
+<p>Email:<%=u.email%></p>
+<% end %>
+
+</div>

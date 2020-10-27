@@ -1,0 +1,31 @@
+@import "bootstrap";
+.signup,input,.login,.updatedetails{
+    text-align: center;
+    font-size: medium;
+    letter-spacing: -1px;
+    width: 50%;
+    margin-bottom: 15px;
+    h2{
+        color: rgb(66, 9, 141);
+    }
+    label{
+        color: darkolivegreen;
+        font-style: italic;
+    }
+    
+}
+.users{
+    color: rgb(12, 17, 51);
+    font-size: medium;
+    letter-spacing: -1px;
+}
+.errors{
+    color: rgb(218, 20, 20);
+}
+.notice{
+    color: forestgreen;
+}
+.home{
+    text-align: center;
+    color: indigo;
+}

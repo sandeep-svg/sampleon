@@ -1,0 +1,22 @@
+<% if flash[:notice] %>
+    <div class="notice"><%= flash[:notice] %> at <%= Time.now %></div>
+<% end %>
+<% if flash[:danger] %>
+    <div class='errors'><%= flash[:danger] %> </div>
+<% end %>
+<div class="login">
+   <h2>Login</h2>
+    <%= form_for(:session, url: login_path) do |f| %>
+
+      <%= f.label :email %><br/>
+      <%= f.email_field :email %><br/>
+
+      <%= f.label :password %><br/>
+      <%= f.password_field :password %><br/>
+
+      <%= f.submit "Log in", class: "btn btn-primary" %>
+    <% end %>
+
+    <p>New user? <%= link_to "Sign up now", signup_path %></p>
+  
+</div>
