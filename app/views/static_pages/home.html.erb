@@ -29,8 +29,8 @@
 <% else %>
 <body><div  class='home'>
 <h1>Welcome !! </h1><br/>
-<p><a  class='btn btn-outline-primary' href='http://localhost:3000/signup'> <em>Sign Up now!</em> </a></p><br/>
-<p><a  class='btn btn-outline-success' href='http://localhost:3000/login'> <em>login</em> </a></p>
+<p  class='btn btn-outline-primary'> <%=link_to 'Sign Up now!' ,signup_path%></p><br/>
+<p class='btn btn-outline-success'> <%=link_to 'login' ,login_path%></p>
 </div>
 </body>
 <% end %>
