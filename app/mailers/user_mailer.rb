@@ -10,6 +10,10 @@ class UserMailer < ApplicationMailer
 
     mail to: "to@example.org"
   end
+  def welcome_mail(user)
+    @user=user
+    mail to: @user.email , subject: 'welcome ' + @user.name
+  end
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
