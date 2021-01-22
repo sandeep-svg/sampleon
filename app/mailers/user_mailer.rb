@@ -1,4 +1,5 @@
 class UserMailer < ApplicationMailer
+  default from: "welcomemailfromsampleapp@gmail.com"
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
@@ -12,7 +13,7 @@ class UserMailer < ApplicationMailer
   end
   def welcome_mail(user)
     @user=user
-    mail to: @user.email , subject: 'welcome ' + @user.name
+    mail to: @user.email , subject: 'welcome ' + @user.name 
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml
