@@ -12,7 +12,7 @@ class UsersController < ApplicationController
       @user=User.new(params.require(:user).permit(:name, :email, :password, :password_confirmation))
       if @user.save
          flash[:notice] = "Account created successfully!!"
-         UserMailer.welcome_mail(@user)
+          UserMailer.welcome_mail(@user).deliver_now
           redirect_to login_path
        else
          render 'new'
