@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'vaccine/check_availability'
+  post 'Get the details', to: 'vaccine#check_availability', as: 'vaccine'
   root 'static_pages#home'
   get 'static_pages/home'
   get 'signup' => 'users#new'
