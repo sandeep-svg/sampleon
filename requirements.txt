@@ -1,1 +1,2 @@
-cowin_api
+requests
+fake_useragent
