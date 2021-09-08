@@ -1,3 +1,17 @@
-<%@sample.split(',').each do |i| %>
-<%=i %><br>
-<%end%>
+<h4>Centers list</h4>
+<table>
+  <tr>
+    <th> Name </th>
+    <th> address </th>
+    <th> pincode </th>
+    <th> fee_type </th>
+  </tr>
+ <% @data.each do |details| %>
+  <tr>
+    <td><%= details["name"] %></td>
+    <td><%= details["address"] %></td>  
+    <td><%= details["pincode"] %></td>
+    <td><%= details["fee_type"] %></td>
+  </tr>
+  <% end %>
+ </table>

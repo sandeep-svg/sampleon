@@ -10,7 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_26_090609) do
+ActiveRecord::Schema.define(version: 2020_11_27_060510) do
+
+  create_table "backups", force: :cascade do |t|
+    t.integer "duser_id"
+    t.text "dcontent"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "eai_ievolve_ascent_badge_data", id: false, force: :cascade do |t|
+    t.string "certification_pk", null: false
+    t.string "employee_id", null: false
+    t.string "certification_id"
+  end
+
+  create_table "eai_ievolves", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.integer "center_id"
+    t.string "name"
+    t.string "address"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "microposts", force: :cascade do |t|
     t.text "content"
@@ -18,6 +44,13 @@ ActiveRecord::Schema.define(version: 2020_10_26_090609) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_microposts_on_user_id"
+  end
+
+  create_table "temps", force: :cascade do |t|
+    t.text "content"
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
