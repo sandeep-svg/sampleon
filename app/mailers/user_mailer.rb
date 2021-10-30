@@ -13,7 +13,18 @@ class UserMailer < ApplicationMailer
   end
   def welcome_mail(user)
     @user=user
-    mail to: @user.email , subject: 'welcome ' + @user.name 
+    mail to: @user.email , subject: 'Welcome mail' 
+  end
+
+  def document(user)
+    @user=user
+    attachments['data.csv'] = File.read('tmp/sample1.csv')
+    mail to: @user.email , subject: 'Attachment' 
+  end
+
+  def login_mail(user)
+    @user=user
+    mail to: @user.email , subject: 'Login Alert' 
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml

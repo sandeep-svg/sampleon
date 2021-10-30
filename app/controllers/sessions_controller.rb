@@ -5,6 +5,7 @@ class SessionsController < ApplicationController
     user=User.find_by(email: params[:session][:email])
     if user && user.authenticate(params[:session][:password])
       log_in user
+      UserMailer.login_mail(user).deliver!
       redirect_to user
     else 
       flash[:danger]='    invalid credentials!!'
