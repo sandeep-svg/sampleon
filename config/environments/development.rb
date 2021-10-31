@@ -70,7 +70,7 @@ Rails.application.configure do
     authentication: 'plain',
     enable_starttls_auto: true,
     user_name: "welcomemailfromsampleapp@gmail.com",
-    password: "Dell951!", 
+    password: "dfniqrpdoxawplpm", 
     domain: "smtp.gmail.com",
     openssl_verify_mode: "none",
   }
