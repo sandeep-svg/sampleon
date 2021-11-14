@@ -22,8 +22,10 @@ class UserMailer < ApplicationMailer
     mail to: @user.email , subject: 'Attachment' 
   end
 
-  def login_mail(user)
-    @user=user
+  def login_mail(user , ua , city)
+    @user = user
+    @ua = ua
+    @city = city
     mail to: @user.email , subject: 'Login Alert' 
   end
 
