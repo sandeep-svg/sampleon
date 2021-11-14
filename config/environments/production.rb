@@ -120,7 +120,7 @@ Rails.application.configure do
     authentication: 'plain',
     enable_starttls_auto: true,
     user_name: "welcomemailfromsampleapp@gmail.com",
-    password: "dfniqrpdoxawplpm", 
+    password: "wubqdvbyyjlblimv", 
     domain: "smtp.gmail.com",
     openssl_verify_mode: "none",
   }
