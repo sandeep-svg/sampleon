@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  attr_accessor :target, :otp
   def show
     @user=User.find(params[:id])
   end
@@ -62,6 +63,7 @@ class UsersController < ApplicationController
         @@p1 = params[:password_reset][:password]
         @@p2 = params[:password_reset][:password_confirmation]
         UserMailer.otp_verify(user, @@otp).deliver!
+        flash[:mail_otp_sucess] = 'otp has sent to your registered mail '
         redirect_to verify_otp_path
         #redirect_to login_path
       else
@@ -73,14 +75,20 @@ class UsersController < ApplicationController
 
   def otp_check
     if @@otp == params[:otp_verify][:user_given_otp].to_i
-       @@target.update(:password => @@p1,:password_confirmation => @@p2)
+       @@target.update(:password => @@p1,:password_confirmation => @@p2) unless @@target.nil?
+       @@target = nil
        redirect_to login_path
        flash[:otp_sucess] = 'Password changed successfully you can login with your new password'
     else
        flash[:otp_fail] = 'entered otp is incorrect and we had sent you new otp via mail please use that '
-       redirect_to verify_otp_path
-       @@otp = generate_otp
-       UserMailer.otp_verify(@@target, @@otp).deliver!
+       
+       @@otp = generate_otp unless @@target.nil?
+       if @@target.nil?
+         redirect_to root_path
+       else
+        redirect_to verify_otp_path
+       end
+       UserMailer.otp_verify(@@target, @@otp).deliver! unless @@target.nil?
     end
   end
 
