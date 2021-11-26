@@ -29,6 +29,12 @@ class UserMailer < ApplicationMailer
     mail to: @user.email , subject: 'Login Alert' 
   end
 
+  def otp_verify(user, otp)
+    @otp = otp
+    @user = user
+    mail to: @user.email , subject: 'Otp Request' 
+  end
+
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #

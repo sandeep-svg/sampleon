@@ -4,6 +4,9 @@
 <% if flash[:danger] %>
     <div class='errors'><%= flash[:danger] %> </div>
 <% end %>
+<% if flash[:otp_sucess] %>
+    <div class='notice'><%= flash[:otp_sucess] %> </div>
+<% end %>
 <div class="login">
    <h2>Login</h2>
     <%= form_for(:session, url: login_path) do |f| %>
@@ -17,6 +20,7 @@
       <%= f.submit "Log in", class: "btn btn-primary" %>
     <% end %>
 
-    <p>New user? <%= link_to "Sign up now", signup_path %></p>
+    <p>New user? <%= link_to "Sign up now", signup_path %></p> </br>
+    <p>Trouble logging in ? <%= link_to "forgot password", password_reset_path %></p>
   
 </div>

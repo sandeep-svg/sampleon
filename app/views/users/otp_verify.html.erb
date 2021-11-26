@@ -1,0 +1,12 @@
+<% if flash[:otp_fail] %>
+    <div class='errors'><%= flash[:otp_fail] %> </div>
+<% end %>
+<div class='login'>
+<%=form_for(:otp_verify, url: otp_path)  do |f|%>
+    
+    <%= f.label :'enter Otp ' %><br/>
+    <%= f.text_field :user_given_otp %><br/>
+
+    <%=f.submit 'verify',class:'btn btn-primary'%>
+   <%end%>
+</div>
