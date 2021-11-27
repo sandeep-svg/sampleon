@@ -1,0 +1,9 @@
+<div class="login">
+   <h2>Login with OTP</h2>
+    <%= form_for(:session, url: login_path) do |f| %>
+
+      <%= f.label :email %><br/>
+      <%= f.email_field :email %><br/>
+
+      <%= f.submit "Request otp", class: "btn btn-primary" %>
+    <% end %>

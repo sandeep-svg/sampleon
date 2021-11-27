@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   attr_accessor :target, :otp
+  @@target = nil
+  @@otp = nil
   def show
     @user=User.find(params[:id])
   end
@@ -40,7 +42,7 @@ class UsersController < ApplicationController
   def password_reset
   end
 
-  def generate_otp
+  def self.generate_otp
     otp = []
     for i in 1..6
         otp << rand(9)
@@ -58,7 +60,7 @@ class UsersController < ApplicationController
       redirect_to password_reset_path
     else
       if params[:password_reset][:password] == params[:password_reset][:password_confirmation]
-        @@otp = generate_otp
+        @@otp = self.class.generate_otp
         @@target = user
         @@p1 = params[:password_reset][:password]
         @@p2 = params[:password_reset][:password_confirmation]
@@ -77,12 +79,26 @@ class UsersController < ApplicationController
     if @@otp == params[:otp_verify][:user_given_otp].to_i
        @@target.update(:password => @@p1,:password_confirmation => @@p2) unless @@target.nil?
        @@target = nil
+       @@otp = nil
        redirect_to login_path
        flash[:otp_sucess] = 'Password changed successfully you can login with your new password'
+    elsif $login_otp
+      if $login_otp == params[:otp_verify][:user_given_otp].to_i
+        $login_otp = nil
+        log_in $new_login_user
+        ua = UserAgent.parse(request.user_agent)
+        UserMailer.login_mail($new_login_user , ua , city = request.location.city).deliver!
+        redirect_to $new_login_user
+      else
+        $login_otp = self.class.generate_otp
+        UserMailer.send_login_otp($new_login_user, $login_otp).deliver!
+        flash[:login_with_otp_failed] = 'Entered Otp is incorrect please use new otp we just sent to your mail'
+        redirect_to verify_otp_path
+      end
     else
        flash[:otp_fail] = 'entered otp is incorrect and we had sent you new otp via mail please use that '
        
-       @@otp = generate_otp unless @@target.nil?
+       @@otp = self.class.generate_otp unless @@target.nil?
        if @@target.nil?
          redirect_to root_path
        else

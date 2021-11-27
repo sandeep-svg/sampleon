@@ -4,6 +4,9 @@
 <% if flash[:mail_otp_sucess] %>
     <div class='notice'><%= flash[:mail_otp_sucess] %> </div>
 <% end %>
+<% if flash[:login_with_otp_failed] %>
+    <div class='errors'><%= flash[:login_with_otp_failed] %> </div>
+<% end %>
 <div class='login'>
 <%=form_for(:otp_verify, url: otp_path)  do |f|%>
     

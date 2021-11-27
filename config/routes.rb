@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   post 'update password', to: 'users#update_password', as: 'password'
   get 'verify_otp' => 'users#otp_verify'
   post 'verify_otp', to: 'users#otp_check', as: 'otp'
+  get 'login_otp' => 'sessions#login_with_otp'
+  get 'login_methods' => 'sessions#login_methods'
   
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]

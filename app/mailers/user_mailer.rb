@@ -35,6 +35,12 @@ class UserMailer < ApplicationMailer
     mail to: @user.email , subject: 'Otp Request' 
   end
 
+  def send_login_otp(user, otp)
+    @otp = otp
+    @user = user
+    mail to: @user.email , subject: 'Otp for Login Request'
+  end
+
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #
