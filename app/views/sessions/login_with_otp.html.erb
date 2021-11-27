@@ -1,3 +1,6 @@
+<% if flash[:invalid_user] %>
+    <div class='errors'><%= flash[:invalid_user] %> </div>
+<% end %>
 <div class="login">
    <h2>Login with OTP</h2>
     <%= form_for(:session, url: login_path) do |f| %>
