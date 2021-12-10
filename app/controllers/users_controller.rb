@@ -58,8 +58,8 @@ class UsersController < ApplicationController
     else
       if params[:password_reset][:password] == params[:password_reset][:password_confirmation]
         otp = self.class.generate_otp
-        Rails.cache.write(session['session_id']+'forgot_password_user',{user => otp},expires_in: 30.second)
-        Rails.cache.write(session['session_id']+'forgot_password_user_params',{'p1' => params[:password_reset][:password],'p2' => params[:password_reset][:password_confirmation]},expires_in: 30.second)
+        Rails.cache.write(session['session_id']+'forgot_password_user',{user => otp},expires_in: 3.minute)
+        Rails.cache.write(session['session_id']+'forgot_password_user_params',{'p1' => params[:password_reset][:password],'p2' => params[:password_reset][:password_confirmation]},expires_in: 3.minute)
         UserMailer.otp_verify(user, otp).deliver!
         flash[:mail_otp_sucess] = 'otp has sent to your registered mail '
         redirect_to verify_otp_path
@@ -90,7 +90,7 @@ class UsersController < ApplicationController
         redirect_to user
       else
         login_otp = self.class.generate_otp
-        Rails.cache.write(session['session_id'],{user=>login_otp})
+        Rails.cache.write(session['session_id'],{user=>login_otp},expires_in: 3.minute)
         UserMailer.send_login_otp(user, login_otp).deliver!
         flash[:login_with_otp_failed] = 'Entered Otp is incorrect please use new otp we just sent to your mail'
         redirect_to verify_otp_path
@@ -104,6 +104,7 @@ class UsersController < ApplicationController
        else
         redirect_to verify_otp_path
        end
+       Rails.cache.write(session['session_id']+'forgot_password_user',{user => otp},expires_in: 3.minute)
        UserMailer.otp_verify(target, otp).deliver! unless target.nil?
     end
   end

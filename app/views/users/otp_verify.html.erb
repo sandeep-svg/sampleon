@@ -11,7 +11,7 @@
 <% if flash[:login_with_otp_failed] %>
     <div class='errors'><%= flash[:login_with_otp_failed] %> </div>
 <% end %>
-<div class='notice'><%= 'Enter the otp within 30 seconds , after 30 seconds it will expire' %> </div>
+<div class='notice'><%= 'Enter the otp within 3 minutes , after 3 minutes it will expire' %> </div>
 <div class='login'>
 <%=form_for(:otp_verify, url: otp_path)  do |f|%>
     

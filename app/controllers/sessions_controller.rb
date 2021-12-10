@@ -25,7 +25,7 @@ class SessionsController < ApplicationController
       else
         @@user_flag = nil
         login_otp = UsersController.generate_otp
-        Rails.cache.write(session['session_id'],{user=>login_otp},expires_in: 30.second)
+        Rails.cache.write(session['session_id'],{user=>login_otp},expires_in: 3.minute)
         UserMailer.send_login_otp(user, login_otp).deliver!
         flash[:login_otp_sent_sucess] = 'Otp sent sucessfully.'
         redirect_to verify_otp_path
