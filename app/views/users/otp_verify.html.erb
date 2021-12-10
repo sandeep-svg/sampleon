@@ -1,12 +1,17 @@
 <% if flash[:otp_fail] %>
     <div class='errors'><%= flash[:otp_fail] %> </div>
 <% end %>
+
+<% if flash[:login_otp_sent_sucess] %>
+    <div class='notice'><%= flash[:login_otp_sent_sucess] %> </div>
+<% end %>
 <% if flash[:mail_otp_sucess] %>
     <div class='notice'><%= flash[:mail_otp_sucess] %> </div>
 <% end %>
 <% if flash[:login_with_otp_failed] %>
     <div class='errors'><%= flash[:login_with_otp_failed] %> </div>
 <% end %>
+<div class='notice'><%= 'Enter the otp within 30 seconds , after 30 seconds it will expire' %> </div>
 <div class='login'>
 <%=form_for(:otp_verify, url: otp_path)  do |f|%>
     

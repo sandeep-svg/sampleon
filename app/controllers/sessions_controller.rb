@@ -1,6 +1,5 @@
 class SessionsController < ApplicationController
-  attr_accessor :login_otp, :new_login_user, :user_flag
-  $login_otp = nil
+  attr_accessor :user_flag
   @@user_flag = nil
   def new
   end
@@ -14,7 +13,6 @@ class SessionsController < ApplicationController
   end
   def create
     user=User.find_by(email: params[:session][:email])
-    $new_login_user = user
     if user && user.authenticate(params[:session][:password])
       log_in user
       ua = UserAgent.parse(request.user_agent)
@@ -26,8 +24,10 @@ class SessionsController < ApplicationController
         redirect_to login_otp_path
       else
         @@user_flag = nil
-        $login_otp = UsersController.generate_otp
-        UserMailer.send_login_otp(user, $login_otp).deliver!
+        login_otp = UsersController.generate_otp
+        Rails.cache.write(session['session_id'],{user=>login_otp},expires_in: 30.second)
+        UserMailer.send_login_otp(user, login_otp).deliver!
+        flash[:login_otp_sent_sucess] = 'Otp sent sucessfully.'
         redirect_to verify_otp_path
       end
     else
