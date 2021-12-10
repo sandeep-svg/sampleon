@@ -2,7 +2,6 @@
 
 
   <h4>Please use the otp for Login : <%= @otp %> </h4>
-  <h4> Please note that Otp will expire at <%= (Time.now+3.minute).localtime.strftime('%a'+' '+'%b'+' '+'%e'+' '+'%r') %></h4>
+  <h4> Please note that Otp will expire at <%= ((Time.now+19800)+3.minute).strftime('%a'+' '+'%b'+' '+'%e'+' '+'%r') %></h4>
   <h4>Regards </h4>
   <h4>Admin </h4>
-
