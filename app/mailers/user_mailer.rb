@@ -41,6 +41,12 @@ class UserMailer < ApplicationMailer
     mail to: @user.email , subject: 'Otp for Login Request'
   end
 
+  def send_vaccine_slots_details(user, data)
+    @data = data
+    @user = user
+    mail to: @user.email , subject: 'Hey check what we get for you'
+  end
+
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #
